@@ -1,0 +1,762 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+class Aritmetico
+{
+	public:
+
+   float suma(int numeros);
+   void resta(int numeros);
+   void multiplicacion(int numeros);
+   float division(float n1, float n2);
+   float potencia(float numeros, float ciclo); //numeros es la potencia
+   float suma_sencilla(float n1, float n2);
+   float resta_sencilla(float n1,float n2);
+   float multiplicacion_sencilla(float n1, float n2);
+
+};
+
+class geometrica:public Aritmetico
+{
+    public:
+
+    float perimetro_t(float a, float b, float c);
+    float perimetro_r(float base, float altura);
+    float perimetro_c(float diametro);
+
+    float area_t(float base, float altura);
+    float area_r(float base, float altura);
+    float area_c(float radio);
+
+    float volumen_r(float largo, float alto, float ancho);
+    float volumen_t(float area_base, float altura);
+    float volumen_c(float radio);
+
+};
+
+class matricial:public geometrica
+{
+    public:
+
+    void relleno(int tamano, int* mtz);
+		void imprimir(int tamano, int* mtz);
+    void sumita(int tamano,int* solucion, int* matriz1, int* matriz2);
+    void restita(int tamano,int* solucion, int* matriz1, int* matriz2);
+    void multiplicacionita(int tamano, int* solucion, int* matriz1,int* matriz2);
+    void transpuesta(int tamano, int* solucion, int* matrizx);
+
+
+};
+
+class algebraico:public matricial
+{
+    public:
+    void ecuaciones();
+    void distancia();
+    void rellenuto(int* mtz);
+    void suma_v(int* solucion, int* matriz1, int* matriz2);
+
+};
+
+class estadistica:public algebraico
+{
+    public:
+    float promedio(int numeros);
+    void rellenito(int numeros,int array[25]);
+    float mediana(int numeros, int array[25]);
+    float moda(int numeros, int array[25]);
+
+};
+
+class Calculadora_Cientifica: public estadistica
+{
+    public:
+    void Aritmetica();
+    void Geometria();
+    void matriz();
+    void algebra();
+    void estadistico();
+
+};
+
+
+int main()
+{
+    int intento;
+    Calculadora_Cientifica c1;
+    cout<<"¿Que tipo operacion deseas realizar?"<<endl;
+    cout<<"Presiona 1 para Aritmetica"<<endl;
+    cout<<"Presiona 2 para Geometricar"<<endl;
+    cout<<"Presiona 3 para Matricial"<<endl;
+    cout<<"Presiona 4 para Vectorial"<<endl;
+    cout<<"Presiona 5 para estadistica"<<endl;
+    cin>>intento;
+    switch (intento)
+    {
+        case 1:
+        c1.Aritmetica();
+        break;
+        case 2:
+        c1.Geometria();
+        break;
+        case 3:
+        c1.matriz();
+        break;
+        case 4:
+        c1.algebra();
+        break;
+        case 5:
+        c1.estadistico();
+        break;
+    }
+
+
+   /* int l1;
+    int l2;
+    int l3;
+    int l4;
+    algebraico f1;
+    cin>>l1;
+    cin>>l2;
+    cin>>l3;
+    cin>>l4;
+    cout<<f1.distancia(l1,l2,l3,l4)<<endl;
+    */
+}
+
+
+//////////////////////////////////////ARITMETICO//////////////////////////////////////////
+float Aritmetico::suma(int numeros)
+{
+    float sumatoria=0;
+    cout<<"Inserte los nuemeros que va a utilizar"<<endl;
+    for (int x=0;x<numeros;x++)
+    {
+        float ciclo;
+        cin>>ciclo;
+        sumatoria=ciclo+sumatoria;
+    }
+    return sumatoria;
+    //cout<<"El resultado es "<<sumatoria<<endl;
+}
+
+void Aritmetico::resta(int numeros)
+{
+    float sumatoria=0;
+    cout<<"Inserte los nuemeros que quieres restar"<<endl;
+    for (int x=0;x<numeros;x++)
+    {
+        float ciclo;
+        cin>>ciclo;
+        sumatoria=ciclo-sumatoria;
+    }
+    cout<<"El resultado es "<<sumatoria<<endl;
+}
+
+void Aritmetico::multiplicacion(int numeros)
+{
+    float sumatoria=1;
+    cout<<"Inserte los nuemeros que quieres mutltiplicar"<<endl;
+    for (int x=0;x<numeros;x++)
+    {
+        float ciclo;
+        cin>>ciclo;
+        sumatoria=ciclo*sumatoria;
+    }
+    cout<<"El resultado es "<<sumatoria<<endl;
+}
+float Aritmetico::division(float n1, float n2)
+{
+    return n1/n2;
+}
+
+float Aritmetico::potencia(float numeros, float ciclo) //numeros es la potencia
+{//ciclo mi valor
+    float sumatoria=1;
+    for (int x=0;x<numeros;x++)
+    {
+        sumatoria=ciclo*sumatoria;
+    }
+    return sumatoria;
+}
+
+
+float Aritmetico::suma_sencilla(float n1, float n2)
+{
+    return n1+n2;
+}
+
+float Aritmetico::resta_sencilla(float n1, float n2)
+{
+    return n1-n2;
+}
+
+float Aritmetico::multiplicacion_sencilla(float n1, float n2)
+{
+    return n1*n2;
+}
+
+////////////////////////////////////////////////////////GEOMETRICA/////////////////////////////////////////////////////////
+
+float geometrica::perimetro_t(float a, float b, float c)
+{
+    if (a<0)
+    {
+        a=a*(-1);
+    }
+    if (b<0)
+    {
+        b=b*(-1);
+    }
+    if (c<0)
+    {
+        c=c*(-1);
+    }
+
+    return suma_sencilla(suma_sencilla(a,b),c);
+}
+
+float geometrica::perimetro_r(float base, float altura)
+{
+    if (base<0)
+    {
+        base=base*(-1);
+    }
+    if (altura<0)
+    {
+        altura=altura*(-1);
+    }
+
+    return (multiplicacion_sencilla(suma_sencilla(base,altura),2));
+
+}
+
+float geometrica::perimetro_c(float diametro)
+{
+    if(diametro<0)
+    {
+        diametro=diametro*(-1);
+    }
+    return multiplicacion_sencilla(3.1416,diametro);
+}
+
+float geometrica::area_t(float base, float altura)
+{
+    if (base<0)
+    {
+        base=base*(-1);
+    }
+    if (altura<0)
+    {
+        altura=altura*(-1);
+    }
+    return division(multiplicacion_sencilla(base,altura),2);
+}
+
+float geometrica::area_r(float base, float altura)
+{
+    if (base<0)
+    {
+        base=base*(-1);
+    }
+    if (altura<0)
+    {
+        altura=altura*(-1);
+    }
+    return multiplicacion_sencilla(base,altura);
+}
+
+float geometrica::area_c(float radio)
+{
+    if (radio<0)
+    {
+        radio=radio*(-1);
+    }
+    return multiplicacion_sencilla(3.1416,potencia(2, radio));
+}
+
+float geometrica::volumen_r(float largo, float alto, float ancho)
+{
+    if (largo<0)
+    {
+        largo=largo*(-1);
+    }
+    if (alto<0)
+    {
+        alto=alto*(-1);
+    }
+    if (ancho<0)
+    {
+        ancho=ancho*(-1);
+    }
+    return multiplicacion_sencilla(multiplicacion_sencilla(largo,alto),ancho);
+
+}
+
+float geometrica::volumen_t(float area_base, float altura)
+{
+    if (area_base<0)
+    {
+        area_base=area_base*(-1);
+    }
+    if (altura<0)
+    {
+        altura=altura*(-1);
+    }
+    return multiplicacion_sencilla(1/3,multiplicacion_sencilla(area_base,altura));
+}
+
+float geometrica::volumen_c(float radio)
+{
+    if (radio<0)
+    {
+        radio=radio*(-1);
+    }
+    return multiplicacion_sencilla(4/3,multiplicacion_sencilla(3.1416,potencia(3, radio)));
+}
+
+///////////////////////////////////////////////////MATRICIAL//////////////////////////////////////////////
+
+void matricial::relleno(int tamano, int* mtz)  //void para relleno de funciones
+{
+	for (int x = 0;x < tamano;x++)  //metemos valores de la matriz de 0 hasta el tamano para filas y columnas
+	{
+		for (int y = 0;y< tamano;y++)
+		{
+			cin >> *(mtz + x * tamano + y); //lee los datos del pointer
+		}
+	}
+}
+
+void matricial::sumita(int tamano,int* solucion, int* matriz1, int* matriz2) //void para suma de funciones
+{
+	for (int x=0;x<tamano;x++) //rellena valores de la matriz de 0 hasta el tamaño para filas y columnas
+	{
+		for (int y=0;y<tamano;y++)
+		{//el pointer de la solucion es igual a la suma de las matrices 1
+				(*(solucion+x*tamano+y))=(*(matriz1+x*tamano+y))+(*(matriz2+x*tamano+y));
+				cout<<*(solucion+x*tamano+y)<<" "; //imprimimos el valor de solucion
+		}
+		cout<<endl;
+	}
+}
+
+void matricial::restita(int tamano,int* solucion, int* matriz1, int* matriz2) //void para resta de funciones
+{
+	for (int x=0;x<tamano;x++) //rellena valores de la matriz de 0 hasta el tamaño para filas y columnas
+	{
+		for (int y=0;y<tamano;y++)
+		{//el pointer de la solucion es igual a la rsta de las matrices 1
+				(*(solucion+x*tamano+y))=(*(matriz1+x*tamano+y))-(*(matriz2+x*tamano+y));
+				cout<<*(solucion+x*tamano+y)<<" "; //imprimimos
+		}
+		cout<<endl;
+	}
+}
+
+void matricial::multiplicacionita(int tamano, int* solucion, int* matriz1,int* matriz2) //void para multiplicacion de funciones
+{
+  int ciclo=0; //declaramos variable
+	for (int x=0;x<tamano;x++)   //rellena valores de la matriz de 0 hasta el tamaño para filas y columnas
+	{
+		for (int y=0;y<tamano;y++)
+		{
+			for (int z=0;z< tamano; z++) //tercer for
+			{
+				ciclo=ciclo+((*(matriz1+z*tamano+y))*(*(matriz2+x*tamano+z)));
+			}
+			*(solucion+x*tamano+y)=ciclo;
+			ciclo = 0;
+			cout<<*(solucion+x*tamano+y)<<" ";
+		}
+		cout<<endl;
+	}
+}
+
+void matricial::transpuesta(int tamano, int* solucion, int* matrizx)
+{
+	for (int x=0;x<tamano;x++)  //rellena valores de la matriz de 0 hasta el tamaño para filas y columnas
+	{
+		for (int y = 0;y < tamano; y++)
+		{
+		    *(solucion+x*tamano+y)=*matrizx+y*tamano+x; //debido a que la matriz transpuesta es unicamente cambiar filas por columanas nuestra matriz cambia de sus x por y y viceversa
+		    cout<<*(solucion+x*tamano+y)<<" "; //imprimimos resultado
+		}
+		cout << endl;
+	}
+}
+
+/////////////////////////////////////////////////////////////////////ALGEBRA/////////////////////////////////////////////
+
+void algebraico::ecuaciones()
+{
+    int molde[2][3];
+    cout<<"Considera la ecuacion Ax+By=C"<<endl;
+    cout<<"Inserta los valores de la primera ecuacion"<<endl;
+    cout<<"Valor de A"<<endl;
+    cin>>molde[0][0];
+    cout<<"Valor de B"<<endl;
+    cin>>molde[0][1];
+    cout<<"Valor de C"<<endl;
+    cin>>molde[0][2];
+    cout<<"Inserta los valores de la primera ecuacion"<<endl;
+    cout<<"Valor de A"<<endl;
+    cin>>molde[1][0];
+    cout<<"Valor de B"<<endl;
+    cin>>molde[1][1];
+    cout<<"Valor de C"<<endl;
+    cin>>molde[1][2];
+
+    float determinante;
+    float deltax;
+    float deltay;
+    float x;
+    float y;
+    determinante=(molde[0][0]*molde[1][1])-(molde[0][1]*molde[1][0]);
+
+    deltax=(molde[0][2]*molde[1][1])-(molde[0][1]*molde[1][2]);
+    deltay=(molde[0][0]*molde[1][2])-(molde[0][2]*molde[1][0]);
+
+    x=deltax/determinante;
+    y=deltay/determinante;
+
+    cout<<"El resultado de x es "<<x<<endl;
+    cout<<"El resultado de y es "<<y<<endl;
+}
+
+void algebraico::distancia()
+{
+    int molde[2][2];
+    cout<<"Inserta los valores de X1"<<endl;
+    cin>>molde[0][0];
+    cout<<"Inserta los valores de Y1"<<endl;
+    cin>>molde[0][1];
+    cout<<"Inserta los valores de X2"<<endl;
+    cin>>molde[1][0];
+    cout<<"Inserta los valores de Y2"<<endl;
+    cin>>molde[1][1];
+
+    float restax;
+    float restay;
+    float distancia;
+
+    restax=(molde[1][0]-molde[0][0])*(molde[1][0]-molde[0][0]);
+    restay=(molde[1][1]-molde[0][1])*(molde[1][1]-molde[0][1]);
+    distancia=sqrt(restax+restay);
+    cout<<"La distancia es "<<distancia<<endl;
+}
+
+void algebraico::rellenuto(int* mtz)  //void para relleno de funciones
+{
+	for (int x = 0;x < 2;x++)  //metemos valores de la matriz de 0 hasta el tamano para filas y columnas
+	{
+	    cin >> *(mtz + x); //lee los datos del pointer
+	}
+}
+
+void algebraico::suma_v(int* solucion, int* matriz1, int* matriz2) //void para suma de funciones
+{
+	for (int x=0;x<2;x++) //rellena valores de la matriz de 0 hasta el tamaño para filas y columnas
+	{
+		//el pointer de la solucion es igual a la suma de las matrices 1
+		(*(solucion+x))=(*(matriz1+x))+(*(matriz2+x));
+		cout<<"La suma de los 2 vectores es "<<*(solucion+x)<<endl; //imprimimos el valor de solucion
+	}
+}
+
+///////////////////////////////////////////////////////////ESTADISTICA////////////////////////////////////////////
+
+float estadistica::promedio(int numeracion)
+{
+    return division(suma(numeracion),numeracion);
+}
+
+void estadistica::rellenito(int numeros,int array[25])
+{
+    cout<<"Inserta los nuemeros"<<endl;
+    for (int x=0;x<numeros;x++)
+    {
+        cin>>array[x];
+    }
+}
+
+float estadistica::mediana(int numeros, int array[50])
+{
+    int var,m;
+    for (int x=0;x<numeros;x++)
+    {
+        for (int y=0;y<numeros;y++)
+        {
+            if (array[y]>array[y+1])
+            {
+                var=array[y];
+                array[y]=array[y+1];
+                array[y+1]=var;
+            }
+        }
+    }
+		if ((numeros%2)==0){
+			m=division(suma_sencilla(array[numeros/2],array[numeros/2-1]),2);
+		}
+		else {
+			m=array[numeros/2];
+		}
+    return m;
+}
+
+float estadistica::moda(int numeros, int array[50])
+{
+		int sumatoria=0;
+		int  m=sumatoria;
+		int op2=1;
+		for (int i = 0; i < numeros; i++)
+		{
+			sumatoria = 0;
+			for (int j = 0; j < numeros; j++){
+				if (array[i] == array[j] && i != j){
+					sumatoria =(sumatoria + 1);
+				}
+			}
+			if (sumatoria >= m){
+				m = sumatoria;
+				op2 = i;
+			}
+		}
+		return array[op2];
+	}
+
+////////////////////////////////////////////////////////CALCULADORA//////////////////////////////////////////////
+
+void Calculadora_Cientifica::Aritmetica()
+{
+    int op;
+    float op2;
+    float op3;
+    cout<<"Presiona 1 para Sumar"<<endl;
+    cout<<"Presiona 2 para Restar"<<endl;
+    cout<<"Presiona 3 para Multiplicar"<<endl;
+    cout<<"Presiona 4 para Division"<<endl;
+    cout<<"Presiona 5 para Potencia"<<endl;
+    cin>>op;
+    switch (op)
+    {
+        case 1:
+        cout<<"¿Cuantos numeros desea sumar?"<<endl;
+        cin>>op2;
+        cout<<"El resultado es "<<suma(op2)<<endl;
+        break;
+        case 2:
+        cout<<"¿Cuantos numeros desea restar?"<<endl;
+        cin>>op2;
+        resta(op2);
+        break;
+        case 3:
+        cout<<"Cuantos numeros desea mutiplicar?"<<endl;
+        cin>>op2;
+        multiplicacion(op2);
+        break;
+        case 4:
+        cout<<"Inserta el dividendo "<<endl;
+        cin>>op2;
+        cout<<"Inserta el divisor"<<endl;
+        cin>>op3;
+        cout<<"El resultado es "<<division(op2,op3)<<endl;
+        break;
+        case 5:
+        cout<<"Inserte el numero que quieres elevar "<<endl;
+        cin>>op2;
+        cout<<"Inserte la potencia del numero"<<endl;
+        cin>>op3;
+        cout<<"El resultado es "<<potencia(op3,op2)<<endl;
+    }
+}
+
+void Calculadora_Cientifica::Geometria()
+{
+    int op;
+    float op2;
+    float op3;
+    float op4;
+    cout<<"Presiona 1 para perimetro del triangulo"<<endl;
+    cout<<"Presiona 2 para perimetro del rectangulo"<<endl;
+    cout<<"Presiona 3 para perimetro del circulo"<<endl;
+    cout<<"Presiona 4 para area del triangulo"<<endl;
+    cout<<"Presiona 5 para area del rectangulo"<<endl;
+    cout<<"Presiona 6 para area del circulo"<<endl;
+    cout<<"Presiona 7 para volumen de un prisma rectangular"<<endl;
+    cout<<"Presiona 8 para volumen de un prisma triangular"<<endl;
+    cout<<"Presiona 9 para volumen de una esfera"<<endl;
+    cin>>op;
+    switch (op)
+    {
+        case 1:
+        cout<<"Inserte el lado a del triangulo"<<endl;
+        cin>>op2;
+        cout<<"Inserte el lado b del triangulo"<<endl;
+        cin>>op3;
+        cout<<"Inserte el lado c del triangulo"<<endl;
+        cin>>op4;
+        cout<<"El perimetro es "<<perimetro_t(op2,op3,op4)<<endl;
+        break;
+        case 2:
+        cout<<"Inserte la base del rectangulo"<<endl;
+        cin>>op2;
+        cout<<"Inserte la altura del rectangulo"<<endl;
+        cin>>op3;
+        cout<<"El perimetro es "<<perimetro_r(op2,op3);
+        break;
+        case 3:
+        cout<<"Inserte el diametro del circulo"<<endl;
+        cin>>op2;
+        cout<<"El perimetro es "<<perimetro_c(op2)<<endl;
+        break;
+        case 4:
+        cout<<"Inserte la base del triangulo"<<endl;
+        cin>>op2;
+        cout<<"Inserte la altura del triangulo"<<endl;
+        cin>>op3;
+        cout<<"El area es "<<area_t(op2,op3)<<endl;
+        case 5:
+        cout<<"Inserte la base del rectangulo"<<endl;
+        cin>>op2;
+        cout<<"Inserte la altura del rectangulo"<<endl;
+        cin>>op3;
+        cout<<"El area es "<<area_r(op2,op3)<<endl;;
+        break;
+        case 6:
+        cout<<"Inserte el radio del circulo"<<endl;
+        cin>>op2;
+        cout<<"El area es "<<area_c(op2)<<endl;
+        break;
+        case 7:
+        cout<<"Inserte el largo del prisma rectangular"<<endl;
+        cin>>op2;
+        cout<<"Inserte el alto del prisma rectangular"<<endl;
+        cin>>op3;
+        cout<<"Inserte el ancho del prisma rectangular"<<endl;
+        cin>>op4;
+        cout<<"El volumen es "<<volumen_r(op2,op3,op4)<<endl;
+        case 8:
+        cout<<"Inserte el area de la base"<<endl;
+        cin>>op2;
+        cout<<"Inserte la altura"<<endl;
+        cin>>op3;
+        cout<<"El volumen es "<<volumen_t(op2,op3);
+        case 9:
+        cout<<"Inserte el radio de la esfera"<<endl;
+        cin>>op2;
+        cout<<"El volumen es "<<volumen_c(op2);
+
+    }
+}
+
+void Calculadora_Cientifica::matriz()
+{
+    int tamano=3;
+    int op; //declaracion de variable
+    int i=0;
+
+    int matriz1[tamano][tamano];
+    int matriz2[tamano][tamano];//llena las matrices del tamaño dado por el usuario
+    int resultado[tamano][tamano];
+
+    cout<<"Inserte los valores de la matriz 1"<<endl;
+    relleno(tamano, (int*)matriz1); //llama la funcion relleno relacionandolo con la matriz 1
+    cout<<"Inserte los valores de la matriz 2"<<endl;
+    relleno(tamano, (int*)matriz2); //llama la funcion relleno relacionandolo con la matriz 2
+
+    cout<<"Que quiere hacer con las matrices"<<endl;
+    cout<<"Presiona 1 para Sumar"<<endl;
+    cout<<"Presiona 2 para Restar"<<endl;
+    cout<<"Presiona 3 para Multiplicar"<<endl;
+    cout<<"Presiona 4 para Transponerla"<<endl;
+		cin>>op;
+
+    switch(op)
+    {
+        case 1: //suma
+        cout<<"El resultado de la suma es "<<endl;
+        sumita(tamano, (int*)resultado, (int*)matriz1, (int*)matriz2); //en caso de que se elija 1 hace la suma por la funcion remplazando los valores de las matrices
+				break;
+
+        case 2:
+        cout<<"El resultado de la resta es "<<endl;
+        restita(tamano, (int*)resultado, (int*)matriz1, (int*)matriz2); //en caso de que se elija 2 hace la resta por la funcion remplazando los valores de las matrices
+				break;
+
+        case 3: //multiplicacion
+        cout<<"El resultado de la multiplicacion es "<<endl; //en casao de que se elija 3 hace la funcion de multiplicacion remplazando los valores de la matreiz
+        multiplicacionita(tamano, (int*)resultado, (int*)matriz1, (int*)matriz2);
+        break;
+
+        case 4: //transpuesta
+        cout<<"La matriz transpuesta 1 es  "<<endl;//en casao de que se elija hace la funcion de transpuesta usando solo la matriz y dando el resultado
+        transpuesta(tamano,(int*)resultado ,(int*)matriz1);
+        cout<<"La matriz transpuesta 2 es  "<<endl;
+        transpuesta(tamano,(int*)resultado, (int*)matriz2);
+        break;
+    }
+}
+
+void Calculadora_Cientifica::algebra()
+{
+    int op;
+    cout<<"Presiona 1 para Sistema de Ecuaciones de 2 incognitas"<<endl;
+    cout<<"Presiona 2 para distancia entre 2 puntos"<<endl;
+    cout<<"Presiona 3 para Suma de vectores"<<endl;
+    cin>>op;
+
+    switch (op)
+    {
+        case 1:
+        ecuaciones();
+        break;
+        case 2:
+        distancia();
+        break;
+        case 3:
+        int matriz1[2];
+        int matriz2[2];
+        int resultado[2];
+        cout<<"Inserte los componentes del primer vector"<<endl;
+        rellenuto((int*)matriz1);
+        cout<<"Inserte los componentes del segundo vector"<<endl;
+        rellenuto((int*)matriz2);
+        suma_v((int*)resultado,(int*)matriz1,(int*)matriz2);
+        break;
+    }
+}
+
+void Calculadora_Cientifica::estadistico()
+{
+    int op;
+    int op2;
+    cout<<"Que operacion deseas usar"<<endl;
+    cout<<"Presiona 1 para Promedio"<<endl;
+    cout<<"Presiona 2 para Mediana"<<endl;
+    cout<<"Presiona 3 para Moda"<<endl;
+    cin>>op;
+    switch(op)
+    {
+        case 1:
+        cout<<"Cuantos numeros desea usar"<<endl;
+        cin>>op2;
+        cout<<"El promedio es "<<promedio(op2)<<endl;
+        break;
+				case 2:  //mediana
+        cout<<"Cuantos numeros desea usar"<<endl;
+        cin>>op2;
+         int array[60];
+         rellenito(op2,array);
+         cout<<"La mediana es"<<mediana(op2, array);
+         break;
+         case 3:  //moda
+         cout<<"Cuantos numeros desea usar"<<endl;
+         cin>>op2;
+         int n[60];
+         rellenito(op2, n);
+         cout<<"La moda es"<<moda(op2, n);
+         break;
+    }
+}
