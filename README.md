@@ -11,5 +11,5 @@ Para reforzarlos se hará un programa que sea como una calculadora conteniendo:
 Creado por :
 --Javier Andree Sosa Reyes
 --Rosa Elena Mar Larios
-//Profesor: MarSH-Up
+//Profesor: @MarSH-Up
 
